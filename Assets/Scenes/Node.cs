@@ -8,6 +8,7 @@ public class Node : IHeapItem<Node>
     public Vector3 worldPosition;
     public int gridX;   // keep track of grid position
     public int gridY;
+    public int movementPenalty;
 
     public int gCost;
     public int hCost;
@@ -17,12 +18,13 @@ public class Node : IHeapItem<Node>
      * @param: {bool} walkable
      * @param: {Vector3 world position
      */
-    public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY)
+    public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY, int _penalty)
     {
         walkable = _walkable;
         worldPosition = _worldPos;
         gridX = _gridX;
         gridY = _gridY;
+        movementPenalty = _penalty;
 
     }
 
