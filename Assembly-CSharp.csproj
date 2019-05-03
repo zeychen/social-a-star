@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scenes\Node.cs" />
     <Compile Include="Assets\Scenes\PathFinding.cs" />
     <Compile Include="Assets\Scenes\PathRequestManager.cs" />
+    <Compile Include="Assets\Scenes\SmartObject.cs" />
     <Compile Include="Assets\Scenes\Unit.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Zee/Documents/01.School/00.GGCS/Research/Social A Star/Socail A Star/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

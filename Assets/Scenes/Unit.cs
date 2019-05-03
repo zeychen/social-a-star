@@ -4,16 +4,18 @@ using System.Collections;
 public class Unit : MonoBehaviour
 {
 
-
     public Transform target;
     float speed = 20;
     Vector3[] path;
     int targetIndex;
 
+    public ArrayList socialAttr { get; set; }
+
     void Start()
     {
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
+
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -46,6 +48,13 @@ public class Unit : MonoBehaviour
 
         }
     }
+
+    //public class UnitAttributes 
+    //{
+    //    public string Group { get; set; }
+    //    //public string Affinity { get; set; }
+    //    //public string Culture { get; set; }
+    //}
 
     public void OnDrawGizmos()
     {

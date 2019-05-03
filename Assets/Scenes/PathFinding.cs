@@ -5,7 +5,7 @@ using System;
 
 public class PathFinding : MonoBehaviour
 {
-    public Transform seeker, target;
+    //public Transform seeker, target;
 
     PathRequestManager requestManager;
     AStarGrid grid;
@@ -27,8 +27,9 @@ public class PathFinding : MonoBehaviour
     //    //{
     //    //    FindPath(seeker.position, target.position);
     //    //}
-    //    FindPath(seeker.position, target.position);
+    //    StartFindPath(seeker.position, target.position);
     //}
+
     IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
         Vector3[] waypoints = new Vector3[0];
@@ -140,11 +141,14 @@ public class PathFinding : MonoBehaviour
             return 14 * distY + 10 * (distX - distY);
         return 14 * distX + 10 * (distY - distX);
     }
+
     int GetSocialAppeal()
     {
         // raycast to figure out whether the path hits an undesirable area
         // undesirable area weight is calculated using CiF
         // if yes then add penalty
+
+        // reduce the chances of encountering undesirable things
         return 0;
     }
 }
