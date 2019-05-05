@@ -8,10 +8,11 @@ public class Node : IHeapItem<Node>
     public Vector3 worldPosition;
     public int gridX;   // keep track of grid position
     public int gridY;
-    public int movementPenalty;
+    public int penalty;
 
     public int gCost;
     public int hCost;
+    public int iCost;
     public Node parent;
     int heapIndex;
     /* Node constructor
@@ -24,7 +25,7 @@ public class Node : IHeapItem<Node>
         worldPosition = _worldPos;
         gridX = _gridX;
         gridY = _gridY;
-        movementPenalty = _penalty;
+        penalty = _penalty;
 
     }
 
@@ -32,7 +33,7 @@ public class Node : IHeapItem<Node>
     {
         get
         {
-            return gCost + hCost;
+            return gCost + hCost + iCost;
         }
     }
 

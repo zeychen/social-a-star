@@ -5,11 +5,10 @@ public class Unit : MonoBehaviour
 {
 
     public Transform target;
-    float speed = 20;
+    public float speed;
     Vector3[] path;
     int targetIndex;
 
-    public ArrayList socialAttr { get; set; }
 
     void Start()
     {
@@ -49,13 +48,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    //public class UnitAttributes 
-    //{
-    //    public string Group { get; set; }
-    //    //public string Affinity { get; set; }
-    //    //public string Culture { get; set; }
-    //}
-
+    // draws path
     public void OnDrawGizmos()
     {
         if (path != null)

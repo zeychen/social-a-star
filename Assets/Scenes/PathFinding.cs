@@ -6,7 +6,7 @@ using System;
 public class PathFinding : MonoBehaviour
 {
     //public Transform seeker, target;
-
+    public int socialWeight;
     PathRequestManager requestManager;
     AStarGrid grid;
     private void Awake()
@@ -20,15 +20,6 @@ public class PathFinding : MonoBehaviour
     {
         StartCoroutine(FindPath(startPos, targetPos));
     }
-
-    //public void Update()
-    //{
-    //    //if (Input.GetButtonDown("Jump"))
-    //    //{
-    //    //    FindPath(seeker.position, target.position);
-    //    //}
-    //    StartFindPath(seeker.position, target.position);
-    //}
 
     IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
@@ -50,14 +41,6 @@ public class PathFinding : MonoBehaviour
                 Node currentNode = openSet.RemoveFirst();
 
                 // optimized search for lowest fCost using heap sort
-                //for (int i = 1; i < openSet.Count; i++)
-                //{
-                //    if(openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
-                //    {
-                //        currentNode = openSet[i];
-                //    }
-                //}
-                //openSet.Remove(currentNode);
                 closedSet.Add(currentNode);
 
                 if(currentNode == targetNode)
@@ -73,11 +56,12 @@ public class PathFinding : MonoBehaviour
                         continue;
                     }
 
-                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor) + neighbor.movementPenalty;
+                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor) + neighbor.penalty;
                     if(newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
                     {
                         neighbor.gCost = newMovementCostToNeighbor;
-                        neighbor.hCost = GetDistance(neighbor, targetNode) + GetSocialAppeal();
+                        neighbor.hCost = GetDistance(neighbor, targetNode);
+                        neighbor.iCost = GetInfluence(neighbor, targetNode) * socialWeight;
                         neighbor.parent = currentNode;
 
                         if (!openSet.Contains(neighbor))
@@ -142,13 +126,19 @@ public class PathFinding : MonoBehaviour
         return 14 * distX + 10 * (distY - distX);
     }
 
-    int GetSocialAppeal()
+    // influence cost portion of A star
+    int GetInfluence(Node a, Node b)
     {
+        Vector3 direction = b.worldPosition - a.worldPosition;
         // raycast to figure out whether the path hits an undesirable area
-        // undesirable area weight is calculated using CiF
-        // if yes then add penalty
-
-        // reduce the chances of encountering undesirable things
-        return 0;
+        Ray ray = new Ray(a.worldPosition, direction);
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(ray, 100);
+        //print("objects hit");
+        //if(hits.Length > 0) { print(hits.Length); }
+        
+        //print(a.gridX);
+        //print(a.gridY);
+        return hits.Length;
     }
 }
