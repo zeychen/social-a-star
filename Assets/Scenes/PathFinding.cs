@@ -64,8 +64,6 @@ public class PathFinding : MonoBehaviour
                         neighbor.iCost = GetInfluence(neighbor) * socialWeight;
                         neighbor.parent = currentNode;
 
-                        
-
                         if (!openSet.Contains(neighbor))
                             openSet.Enqueue(neighbor, neighbor.fCost);
                         else
@@ -148,7 +146,6 @@ public class PathFinding : MonoBehaviour
                 foreach(LayerWeight weight in objDict[key])
                 {
                     influenceValues += weight.objWeight;
-                    print(influenceValues);
                     influenceValues += weight.layerWeight;
                 }
             }
