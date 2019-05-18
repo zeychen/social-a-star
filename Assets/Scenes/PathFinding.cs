@@ -6,7 +6,6 @@ using Priority_Queue;
 
 public class PathFinding : MonoBehaviour
 {
-    //public Transform seeker, target;
     public int socialWeight;
     PathRequestManager requestManager;
     AStarGrid grid;
@@ -32,11 +31,8 @@ public class PathFinding : MonoBehaviour
 
         if (startNode.walkable && targetNode.walkable)
         {
-            //Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
             SimplePriorityQueue<Node> openSet = new SimplePriorityQueue<Node>();
-            //SimplePriorityQueue<Node> closeSet = new SimplePriorityQueue<Node>();
             HashSet<Node> closedSet = new HashSet<Node>();
-            //openSet.Add(startNode);
             openSet.Enqueue(startNode, 0);
 
             while (openSet.Count > 0)
@@ -60,12 +56,12 @@ public class PathFinding : MonoBehaviour
                         continue;
                     }
 
-                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor) + neighbor.penalty;
+                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
                     if(newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
                     {
                         neighbor.gCost = newMovementCostToNeighbor;
                         neighbor.hCost = GetDistance(neighbor, targetNode);
-                        neighbor.iCost = GetInfluence(neighbor, targetNode) * socialWeight;
+                        neighbor.iCost = GetInfluence(neighbor) * socialWeight;
                         neighbor.parent = currentNode;
 
                         
@@ -133,18 +129,32 @@ public class PathFinding : MonoBehaviour
     }
 
     // influence cost portion of A star
-    int GetInfluence(Node a, Node b)
+    int GetInfluence(Node neighbor)
     {
-        Vector3 direction = b.worldPosition - a.worldPosition;
-        // raycast to figure out whether the path hits an undesirable area
-        Ray ray = new Ray(a.worldPosition, direction);
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(ray, 100);
-        //print("objects hit");
-        //if(hits.Length > 0) { print(hits.Length); }
-        
-        //print(a.gridX);
-        //print(a.gridY);
-        return hits.Length;
+        int influenceValues = 0;
+        // raycast to figure out whether the path hits an influence area
+        Ray ray = new Ray(neighbor.worldPosition + Vector3.up * 50, Vector3.down);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, 100))
+        {
+            // get movementPenalty
+            GameObject seeker = GameObject.FindGameObjectWithTag("Player");
+            Dictionary<string, List<LayerWeight>> objDict = seeker.GetComponent<Influences>().smartObjectDictionary;    // key: smart object - value: layers
+            string key = hit.collider.gameObject.name;
+            if (objDict.ContainsKey(key))
+            {
+                // iterate and sum up the weights of each layer
+                foreach(LayerWeight weight in objDict[key])
+                {
+                    influenceValues += weight.objWeight;
+                    print(influenceValues);
+                    influenceValues += weight.layerWeight;
+                }
+            }
+        }
+
+        return influenceValues;
     }
+
 }

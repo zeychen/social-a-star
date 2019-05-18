@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526987551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.9, y: 0, z: -28.1}
+  m_LocalPosition: {x: 15, y: 0, z: -31.4}
   m_LocalScale: {x: 26.666668, y: 1, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -363,10 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57823a64977639447a441f7e3922e2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayCollision: 0
-  influenceLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  displayCollision: 1
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543980726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.6, y: 0, z: -14.4}
+  m_LocalPosition: {x: 4.3, y: 0, z: 31}
   m_LocalScale: {x: 13.333334, y: 1, z: 16}
   m_Children: []
   m_Father: {fileID: 0}
@@ -553,10 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57823a64977639447a441f7e3922e2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayCollision: 0
-  influenceLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  displayCollision: 1
 --- !u!1 &743458561
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +565,7 @@ GameObject:
   - component: {fileID: 743458563}
   - component: {fileID: 743458566}
   m_Layer: 9
-  m_Name: Dog
+  m_Name: Alpaca
   m_TagString: SmartObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -585,7 +579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743458561}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.7, y: 0, z: 17.5}
+  m_LocalPosition: {x: -22.2, y: 0, z: 27.8}
   m_LocalScale: {x: 3.3333335, y: 1, z: 32}
   m_Children: []
   m_Father: {fileID: 0}
@@ -599,10 +593,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743458561}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 6, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &743458564
 MeshRenderer:
@@ -661,10 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57823a64977639447a441f7e3922e2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayCollision: 0
-  influenceLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  displayCollision: 1
 --- !u!1 &833826064
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,10 +684,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833826064}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &833826066
 MeshRenderer:
@@ -751,7 +742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833826064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27, y: 0, z: 8.8}
+  m_LocalPosition: {x: 22.9, y: 0, z: -9.8}
   m_LocalScale: {x: 30, y: 1, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -769,10 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57823a64977639447a441f7e3922e2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayCollision: 0
-  influenceLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  displayCollision: 1
 --- !u!1 &864354345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,22 +1066,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   influenceLayers:
-  - influenceMask:
-      serializedVersion: 2
-      m_Bits: 1024
+  - influenceLayer: Disgust
+    smartObjects:
+    - ObjectTag: Cat
+      weight: 61
+    - ObjectTag: Dog
+      weight: 16
     active: 1
-    weight: 50
-    positivePenalty: 1
-    distanceX: 1
-    distanceZ: 1
-  - influenceMask:
-      serializedVersion: 2
-      m_Bits: 512
+    layerWeight: 30
+  - influenceLayer: Fear
+    smartObjects:
+    - ObjectTag: Alpaca
+      weight: -373
     active: 1
-    weight: 2000
-    positivePenalty: 1
-    distanceX: 1
-    distanceZ: 1
+    layerWeight: 0
 --- !u!1 &1686220870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,7 +1108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686220870}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.8, y: 0, z: -35.3}
+  m_LocalPosition: {x: -5.4, y: 0, z: -13.6}
   m_LocalScale: {x: 6.666667, y: 1, z: 24}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1139,7 +1125,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1686220873
 MeshRenderer:
@@ -1198,7 +1184,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57823a64977639447a441f7e3922e2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayCollision: 0
-  influenceLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  displayCollision: 1

@@ -6,33 +6,20 @@ using UnityEngine;
 public class AStarGrid : MonoBehaviour
 {
 
-    // NOTE: expose CiF overlays as masks
+    // creates the grid that can be used for pathfinding and draws the path
 
     public bool onlyDisplayPathGizmos;
     public Transform player;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
-    //public Influences influenceMap;
-    //public Influence[] influenceLayers;   // array that stores a collection of the layers that overlays the A* path finding
-    //Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();    // Dictionary that keeps track of weight of each layer
-    //LayerMask walkableMask;
     public GameObject seeker;
-    //private GameObject[] seekers;
-    //private List<Attribute> attrArray;
 
     Node[,] grid;   // Grid is made up of a 2D array of Nodes
 
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    //int penaltyMin = int.MaxValue;
-    //int penaltyMax = int.MinValue;
-
-    //int blurSize = 1;
-    //int xmin, xmax, ymin, ymax;
-
-    //bool walkable = false;
     private void Start()
     {
         // calculate how many nodes can fit into grid
@@ -65,28 +52,6 @@ public class AStarGrid : MonoBehaviour
             {
                 int movementPenalty = 0;
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
-                RaycastHit[] hits;
-                hits = Physics.RaycastAll(ray, 100);
-
-                // add up penalty from all layers that get hit by the influence map
-                for (int n = 0; n < hits.Length; n++)
-                {
-                    RaycastHit hit = hits[n];
-                    Influences seekerInfluences = seeker.GetComponent<Influences>();
-                    if(seekerInfluences)
-                    {
-                        foreach (Influence influenceLayer in seekerInfluences.influenceLayers)
-                        {
-                            // add layers to Influences
-                            seekerInfluences.walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
-                            //if (movementPenalty != 0) { print(movementPenalty); }
-                            movementPenalty += movementPenalty;
-                        }
-                    }
-
-                }
-
                 grid[x, y] = new Node(true, worldPoint, x, y, movementPenalty);  // saves node into grid
 
             }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : IHeapItem<Node>
+public class Node
 {
     public bool walkable;
     public Vector3 worldPosition;
@@ -14,7 +14,6 @@ public class Node : IHeapItem<Node>
     public int hCost;
     public int iCost;
     public Node parent;
-    int heapIndex;
     /* Node constructor
      * @param: {bool} walkable
      * @param: {Vector3 world position
@@ -34,18 +33,6 @@ public class Node : IHeapItem<Node>
         get
         {
             return gCost + hCost + iCost;
-        }
-    }
-
-    public int HeapIndex
-    {
-        get
-        {
-            return heapIndex;
-        }
-        set
-        {
-            heapIndex = value;
         }
     }
 
