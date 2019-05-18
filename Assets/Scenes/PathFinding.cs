@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Priority_Queue;
 
 public class PathFinding : MonoBehaviour
 {
@@ -31,16 +32,19 @@ public class PathFinding : MonoBehaviour
 
         if (startNode.walkable && targetNode.walkable)
         {
-            Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+            //Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+            SimplePriorityQueue<Node> openSet = new SimplePriorityQueue<Node>();
+            //SimplePriorityQueue<Node> closeSet = new SimplePriorityQueue<Node>();
             HashSet<Node> closedSet = new HashSet<Node>();
-            openSet.Add(startNode);
+            //openSet.Add(startNode);
+            openSet.Enqueue(startNode, 0);
 
             while (openSet.Count > 0)
             {
                 //Node currentNode = openSet[0];
-                Node currentNode = openSet.RemoveFirst();
+                Node currentNode = openSet.Dequeue();
 
-                // optimized search for lowest fCost using heap sort
+                // optimized search for lowest fCost using priority queue
                 closedSet.Add(currentNode);
 
                 if(currentNode == targetNode)
@@ -64,10 +68,12 @@ public class PathFinding : MonoBehaviour
                         neighbor.iCost = GetInfluence(neighbor, targetNode) * socialWeight;
                         neighbor.parent = currentNode;
 
+                        
+
                         if (!openSet.Contains(neighbor))
-                            openSet.Add(neighbor);
+                            openSet.Enqueue(neighbor, neighbor.fCost);
                         else
-                            openSet.UpdateItem(neighbor);
+                            openSet.UpdatePriority(neighbor, neighbor.fCost);
                     }
                 }
             }

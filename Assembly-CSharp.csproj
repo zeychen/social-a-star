@@ -61,13 +61,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scenes\AStarGrid.cs" />
-    <Compile Include="Assets\Scenes\Heap.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\GenericPriorityQueue.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\GenericPriorityQueueNode.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\Heap.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\IFixedSizePriorityQueue.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\IPriorityQueue.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\Node.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\PathRequestManager.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\SimplePriorityQueue.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\Unit.cs" />
     <Compile Include="Assets\Scenes\Influences.cs" />
-    <Compile Include="Assets\Scenes\Node.cs" />
     <Compile Include="Assets\Scenes\PathFinding.cs" />
-    <Compile Include="Assets\Scenes\PathRequestManager.cs" />
     <Compile Include="Assets\Scenes\SmartObject.cs" />
-    <Compile Include="Assets\Scenes\Unit.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Zee/Documents/01.School/00.GGCS/Research/Social A Star/Socail A Star/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
