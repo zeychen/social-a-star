@@ -50,9 +50,9 @@ public class AStarGrid : MonoBehaviour
         {
             for (int y = 0; y < gridSizeY; y++)
             {
-                int movementPenalty = 0;
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                grid[x, y] = new Node(true, worldPoint, x, y, movementPenalty);  // saves node into grid
+                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+                grid[x, y] = new Node(walkable, worldPoint, x, y);  // saves node into grid
 
             }
         }

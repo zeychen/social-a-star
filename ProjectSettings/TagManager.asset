@@ -6,6 +6,13 @@ TagManager:
   tags:
   - SmartObject
   - Wall
+  - Dog
+  - Cat
+  - Alpaca
+  - Spider
+  - Friend
+  - Enemy
+  - Stranger
   layers:
   - Default
   - TransparentFX

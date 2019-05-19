@@ -7,8 +7,12 @@ using Priority_Queue;
 public class PathFinding : MonoBehaviour
 {
     public int socialWeight;
+    public bool displaySearchArea;
     PathRequestManager requestManager;
     AStarGrid grid;
+
+    HashSet<Node> closedSet = new HashSet<Node>();
+
     private void Awake()
     {
 
@@ -32,7 +36,7 @@ public class PathFinding : MonoBehaviour
         if (startNode.walkable && targetNode.walkable)
         {
             SimplePriorityQueue<Node> openSet = new SimplePriorityQueue<Node>();
-            HashSet<Node> closedSet = new HashSet<Node>();
+            //HashSet<Node> closedSet = new HashSet<Node>();
             openSet.Enqueue(startNode, 0);
 
             while (openSet.Count > 0)
@@ -139,7 +143,7 @@ public class PathFinding : MonoBehaviour
             // get movementPenalty
             GameObject seeker = GameObject.FindGameObjectWithTag("Player");
             Dictionary<string, List<LayerWeight>> objDict = seeker.GetComponent<Influences>().smartObjectDictionary;    // key: smart object - value: layers
-            string key = hit.collider.gameObject.name;
+            string key = hit.collider.gameObject.tag;
             if (objDict.ContainsKey(key))
             {
                 // iterate and sum up the weights of each layer
@@ -152,6 +156,18 @@ public class PathFinding : MonoBehaviour
         }
 
         return influenceValues;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (displaySearchArea)
+        {
+            foreach (Node n in closedSet)
+            {
+                Gizmos.color = new Color(255f, 255f, 255f, 0.3f);
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (1.6f));
+            }
+        }
     }
 
 }
