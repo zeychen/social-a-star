@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scenes\AStarGrid.cs" />
+    <Compile Include="Assets\Scenes\Helper Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scenes\Helper Scripts\GenericPriorityQueue.cs" />
     <Compile Include="Assets\Scenes\Helper Scripts\GenericPriorityQueueNode.cs" />
     <Compile Include="Assets\Scenes\Helper Scripts\Heap.cs" />
